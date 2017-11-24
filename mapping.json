@@ -1,0 +1,53 @@
+{
+    "settings": {
+    "analysis": {
+        "analyzer": {
+            "en": {
+                "tokenizer": "standard",
+                "stopwords": "_english_",
+                "filter": [
+                    "lowercase",
+                    "en_US",
+                    "synonym",
+                    "asciifolding",
+                    "en_stemmer"
+                ]
+            },
+            "synonym" : {
+                "tokenizer" : "whitespace",
+                "filter" : ["synonym"] 
+            }
+        },
+        "filter": {
+            "en_US": {
+                "type": "hunspell",
+                "locale": "en_US",
+                "dedup": true
+            },
+            "synonym" : {
+                "type" : "synonym", 
+                "synonyms_path" : "analysis/synonym.txt",
+                "tokenizer" : "whitespace" 
+            },
+            "en_stemmer" : {
+                "type" : "stemmer",
+                "name" : "english"
+            }
+        }
+    }
+},
+    "mappings": {
+        "knowledgebase": {
+            "properties": {
+                "question": {
+                    "type": "text",
+                    "analyzer" : "en"
+                },
+                "answer": {
+                    "type": "text",
+                    "analyzer" : "en"
+                }
+            }
+        }
+    }
+}
